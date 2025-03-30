@@ -32,7 +32,7 @@ RUN pnpm --filter=./apps/dokploy --prod deploy /prod/dokploy
 RUN cp -R /usr/src/app/apps/dokploy/.next /prod/dokploy/.next
 RUN cp -R /usr/src/app/apps/dokploy/dist /prod/dokploy/dist
 
-FROM base AS dockly
+FROM base AS dokploy
 WORKDIR /app
 
 # Set production

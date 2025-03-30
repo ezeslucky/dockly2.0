@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+  dokploy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dockly
+    env_file:
+      - .env.production  
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - api
+      - schedules
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dockly
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+    networks:
+      - app-network
+
+  schedules:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dockly
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+    networks:
+      - app-network
+
+  monitoring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dockly
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge this is write 
